@@ -1,0 +1,59 @@
+body{
+    background-image: url('https://www.ctsp.gov.tw/img/slider/3.jpg');
+    position: relative;
+    color: white;
+}
+
+img {
+    z-index: 0;
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50% , 0%)
+}
+
+button {
+    margin: 5px;
+}
+
+.button-container {
+    position: relative; /* Create a positioning context */
+    z-index: 1; /* Set a higher z-index to place buttons above other elements */
+}
+
+.button-container div {
+    position: absolute;
+}
+
+.light_item {
+    top: 30px;
+    right: 90px;
+}
+
+.leftHand, .rightHand {
+    display: flex;
+    flex-direction: column;
+}
+
+.leftHand {
+    top: 250px;
+    right: 30px;
+}
+
+.rightHand {
+    top: 250px;
+    left: 30px;
+}
+
+.head {
+    top: 100px;
+    left: 50px;
+}
+
+.text-to-speech {
+    z-index: 1;
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50% , 0%)
+}

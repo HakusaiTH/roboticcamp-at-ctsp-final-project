@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Robot Control</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+    <!-- <link rel="stylesheet" href="/static/css/main.css">    -->
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+<body>
+    <h1>Robot Control</h1>
+
+    <div class="button-container">
+
+        <div class="light_item">
+            <button type="button" class="robot-button" data-action="0">Light Off</button>
+            <button type="button" class="robot-button" data-action="1">Light On</button>
+        </div>
+        
+        <div class="leftHand">
+            <button type="button" class="robot-button" data-action="2">Left Hand Up</button>
+            <button type="button" class="robot-button" data-action="3">Left Hand Down</button>
+        </div>
+        
+        <div class="rightHand">
+            <button type="button" class="robot-button" data-action="4">Right Hand Up</button>
+            <button type="button" class="robot-button" data-action="5">Right Hand Down</button>
+        </div>
+        
+        <div class="head">
+            <button type="button" class="robot-button" data-action="6">Head Left</button>
+            <button type="button" class="robot-button" data-action="7">Head Right</button>
+        </div>
+        
+        <div class="move">
+            <button type="button" class="robot-button" data-action="8">Forward</button>
+            <button type="button" class="robot-button" data-action="9">Backward</button>
+            <button type="button" class="robot-button" data-action="L">Left Turn</button>
+            <button type="button" class="robot-button" data-action="R">Right Turn</button>
+        </div>
+    </div>
+
+    <div class="text-to-speech">
+        <input type="text" id="text-to-speech-input" placeholder="Enter text to convert to speech">
+        <button id="text-to-speech-button">Convert to Speech</button>
+    </div>
+
+    <img src="{{url_for('static', filename='robot.png')}}" /> 
+    <!--    <img src="/static/robot.png" alt="">    -->
+
+    <script>
+        $(document).ready(function() {
+            $('.robot-button').click(function() {
+                var action = $(this).data('action');
+                $.ajax({
+                    type: 'POST',
+                    url: '/robot_control',
+                    data: { action: action },
+                    success: function(response) {
+                        // Handle the response from the server here (if needed)
+                        console.log('Command sent to the robot: ' + action);
+                    }
+                });
+            });
+
+            $('#text-to-speech-button').click(function() {
+                var textToConvert = $('#text-to-speech-input').val();
+
+                if (textToConvert) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/robot_control', // Change this URL to the appropriate endpoint
+                        data: { text: textToConvert }, // Send the user input as "text"
+                        success: function(response) {
+                            console.log('Text sent for speech generation: ' + textToConvert);
+                        }
+                    });
+                }
+            });
+
+        });
+
+    </script>
+</body>
+</html>
