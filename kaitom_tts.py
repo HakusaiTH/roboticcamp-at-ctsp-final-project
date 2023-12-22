@@ -3,7 +3,7 @@ import pygame
 
 def generate_and_play_audio(text):
     # You can request an API key at https://ai.iapp.co.th
-    apikey = 'v076bYzziXnBKo0BvxvA65xjzrRTQMIY'
+    apikey = '...'
 
     api = iapp_ai.api(apikey)
 
